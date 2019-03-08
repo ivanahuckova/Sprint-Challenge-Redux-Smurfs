@@ -22,8 +22,11 @@ export const FETCHING_ON = 'FETCHING_ON';
 export const FETCHING_OFF = 'FETCHING_OFF';
 export const ADDING_ON = 'ADDING_ON';
 export const ADDING_OFF = 'ADDING_OFF';
+export const ERROR_HANDLING = 'ERROR_HANDLING';
+export const ERROR_RESET = 'ERROR_RESET';
 
 export const getSmurfs = () => dispatch => {
+  dispatch(errorReset());
   dispatch(fetchingOn());
   axios
     .get(`http://localhost:3333/smurfs`)
@@ -31,10 +34,11 @@ export const getSmurfs = () => dispatch => {
       dispatch({ type: GET_SMURFS, payload: res.data });
       dispatch(fetchingOff());
     })
-    .catch(err => dispatch(console.log(err)));
+    .catch(err => dispatch({ type: ERROR_HANDLING, payload: err.message }));
 };
 
 export const addSmurf = (name, age, height) => dispatch => {
+  dispatch(errorReset());
   dispatch(addingOn());
   axios
     .post(`http://localhost:3333/smurfs`, {
@@ -46,7 +50,7 @@ export const addSmurf = (name, age, height) => dispatch => {
       dispatch({ type: ADD_SMURF, payload: res.data });
       dispatch(addingOff());
     })
-    .catch(err => dispatch(console.log(err)));
+    .catch(err => dispatch({ type: ERROR_HANDLING, payload: err.message }));
 };
 
 export const fetchingOn = () => {
@@ -70,5 +74,11 @@ export const addingOn = () => {
 export const addingOff = () => {
   return {
     type: ADDING_OFF
+  };
+};
+
+export const errorReset = () => {
+  return {
+    type: ERROR_RESET
   };
 };

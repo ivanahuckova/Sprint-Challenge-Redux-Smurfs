@@ -65,6 +65,16 @@ export default function smurfs(state = initialState, action) {
         ...state,
         addingSmurf: false
       };
+    case types.ERROR_RESET:
+      return {
+        ...state,
+        error: null
+      };
+    case types.ERROR_HANDLING:
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }

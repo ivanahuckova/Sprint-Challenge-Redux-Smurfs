@@ -27,6 +27,7 @@ export class App extends React.Component {
           Show me some smurfs!
         </button>
         <div>{this.props.fetchingSmurfs && <div>Fetching...</div>}</div>
+        <div>{this.props.error && <div>{this.props.error}</div>}</div>
         <form>
           <h4>Add some smurfs</h4>
           <div>
@@ -78,7 +79,8 @@ function mapStateToProps(state) {
   return {
     smurfs: state.smurfs,
     fetchingSmurfs: state.fetchingSmurfs,
-    addingSmurf: state.addingSmurf
+    addingSmurf: state.addingSmurf,
+    error: state.error
   };
 }
 
