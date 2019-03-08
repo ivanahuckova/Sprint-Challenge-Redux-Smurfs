@@ -23,7 +23,7 @@ export const getSmurfs = () => dispatch => {
   axios
     .get(`http://localhost:3333/smurfs`)
     .then(res => dispatch({ type: GET_SMURFS, payload: res.data }))
-    .catch(err => dispatch(console.log(err.message)));
+    .catch(err => dispatch(console.log(err)));
 };
 
 export const addSmurf = (name, age, height) => dispatch => {
@@ -34,5 +34,5 @@ export const addSmurf = (name, age, height) => dispatch => {
       height
     })
     .then(res => dispatch({ type: ADD_SMURF, payload: res.data }))
-    .catch(err => dispatch(console.log(err.message)));
+    .catch(err => dispatch(console.log(err)));
 };

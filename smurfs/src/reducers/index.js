@@ -34,7 +34,7 @@ const initialState = {
 };
 
 export default function smurfs(state = initialState, action) {
-  switch (action.types) {
+  switch (action.type) {
     case types.GET_SMURFS:
       return {
         ...state,
