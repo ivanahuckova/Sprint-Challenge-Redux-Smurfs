@@ -24,7 +24,7 @@
 
 import * as types from '../actions';
 
-initialState = {
+const initialState = {
   smurfs: [],
   fetchingSmurfs: false,
   addingSmurf: false,
