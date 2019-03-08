@@ -32,3 +32,15 @@ initialState = {
   deletingSmurf: false,
   error: null
 };
+
+export default function smurfs(state = initialState, action) {
+  switch (action.types) {
+    case types.GET_SMURFS:
+      return {
+        ...state,
+        smurfs: action.payload
+      };
+    default:
+      return state;
+  }
+}
