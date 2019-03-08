@@ -43,7 +43,6 @@ export class App extends React.Component {
             type="submit"
             onClick={event => {
               event.preventDefault();
-              console.log(this.nameRef.current.value);
               this.props.addSmurf(this.nameRef.current.value, this.ageRef.current.value, this.heightRef.current.value);
             }}>
             Submit
