@@ -19,6 +19,23 @@ export class App extends Component {
           }}>
           Show me some smurfs!
         </button>
+        <div>
+          {this.props.smurfs.map(smurf => {
+            return (
+              <div key={smurf.name}>
+                <div>
+                  Name:<span>{smurf.name}</span>
+                </div>
+                <div>
+                  Age:<span>{smurf.age}</span>
+                </div>
+                <div>
+                  Height:<span>{smurf.height}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
