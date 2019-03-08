@@ -14,5 +14,25 @@
    D - deleteSmurf
 */
 
+import axios from 'axios';
+
 export const ADD_SMURF = 'ADD_SMURF';
 export const GET_SMURFS = 'GET_SMURFS';
+
+export const getSmurfs = () => dispatch => {
+  axios
+    .get(`http://localhost:3333/smurfs`)
+    .then(res => dispatch({ type: GET_SMURFS, payload: res.data }))
+    .catch(err => dispatch(console.log(err.message)));
+};
+
+export const addSmurf = (name, age, height) => dispatch => {
+  axios
+    .post(`http://localhost:3333/smurfs`, {
+      name,
+      age,
+      height
+    })
+    .then(res => dispatch({ type: ADD_SMURF, payload: res.data }))
+    .catch(err => dispatch(console.log(err.message)));
+};
