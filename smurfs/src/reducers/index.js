@@ -40,6 +40,16 @@ export default function smurfs(state = initialState, action) {
         ...state,
         smurfs: action.payload
       };
+    case types.ADD_SMURF:
+      let newSmurf = {
+        name: action.name,
+        age: action.age,
+        height: action.height
+      };
+      return {
+        ...state,
+        smurfs: [...state.smurfs, newSmurf]
+      };
     default:
       return state;
   }
