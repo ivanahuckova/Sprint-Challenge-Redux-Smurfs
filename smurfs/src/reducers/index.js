@@ -45,6 +45,11 @@ export default function smurfs(state = initialState, action) {
         ...state,
         smurfs: action.payload
       };
+    case types.DELETE_SMURF:
+      return {
+        ...state,
+        smurfs: action.payload
+      };
     case types.FETCHING_ON:
       return {
         ...state,

@@ -18,6 +18,7 @@ import axios from 'axios';
 
 export const ADD_SMURF = 'ADD_SMURF';
 export const GET_SMURFS = 'GET_SMURFS';
+export const DELETE_SMURF = 'DELETE_SMURF';
 export const FETCHING_ON = 'FETCHING_ON';
 export const FETCHING_OFF = 'FETCHING_OFF';
 export const ADDING_ON = 'ADDING_ON';
@@ -50,6 +51,14 @@ export const addSmurf = (name, age, height) => dispatch => {
       dispatch({ type: ADD_SMURF, payload: res.data });
       dispatch(addingOff());
     })
+    .catch(err => dispatch({ type: ERROR_HANDLING, payload: err.message }));
+};
+
+export const deleteSmurf = id => dispatch => {
+  dispatch(errorReset());
+  axios
+    .delete(`http://localhost:3333/smurfs/${id}`)
+    .then(res => dispatch({ type: DELETE_SMURF, payload: res.data }))
     .catch(err => dispatch({ type: ERROR_HANDLING, payload: err.message }));
 };
 

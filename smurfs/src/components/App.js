@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSmurfs, addSmurf } from '../actions';
+import { getSmurfs, addSmurf, deleteSmurf } from '../actions';
 import './App.css';
 
 /*
@@ -66,6 +66,13 @@ export class App extends React.Component {
                   <div>
                     Height:<span>{smurf.height}</span>
                   </div>
+                  <button
+                    onClick={event => {
+                      event.preventDefault();
+                      this.props.deleteSmurf(smurf.id);
+                    }}>
+                    Delete <span>{smurf.name}</span>
+                  </button>
                 </div>
               );
             })}
@@ -85,7 +92,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getSmurfs, addSmurf }, dispatch);
+  return bindActionCreators({ getSmurfs, addSmurf, deleteSmurf }, dispatch);
 }
 
 export default connect(
