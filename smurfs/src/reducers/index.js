@@ -50,6 +50,15 @@ export default function smurfs(state = initialState, action) {
         ...state,
         smurfs: [...state.smurfs, newSmurf]
       };
+
+      return [
+        ...state,
+        {
+          id: action.id,
+          text: action.text,
+          completed: false
+        }
+      ];
     default:
       return state;
   }
