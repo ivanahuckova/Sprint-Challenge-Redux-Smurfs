@@ -1,31 +1,25 @@
-/* 
-  Action Types Go Here!
-  Be sure to export each action type so you can pull it into your reducer
-*/
-
-/*
-  For this project you'll need at least 2 action creators for the main portion,
-   and 2 more for the stretch problem.
-   Be sure to include action types for each type of action creator. Also, be sure to mind
-     the "pending" states like, fetching, creating, updating and deleting.
-   C - addSmurf
-   R - getSmurfs
-   U - updateSmurf
-   D - deleteSmurf
-*/
-
 import axios from 'axios';
 
+//export action types
+
+//action types for working with server
 export const ADD_SMURF = 'ADD_SMURF';
 export const GET_SMURFS = 'GET_SMURFS';
 export const DELETE_SMURF = 'DELETE_SMURF';
+
+//transition handling action types
 export const FETCHING_ON = 'FETCHING_ON';
 export const FETCHING_OFF = 'FETCHING_OFF';
 export const ADDING_ON = 'ADDING_ON';
 export const ADDING_OFF = 'ADDING_OFF';
+export const DELETING_ON = 'DELETING_ON';
+export const DELETING_OFF = 'DELETING_OFF';
+
+//error handling action types
 export const ERROR_HANDLING = 'ERROR_HANDLING';
 export const ERROR_RESET = 'ERROR_RESET';
 
+//load smurfs
 export const getSmurfs = () => dispatch => {
   dispatch(errorReset());
   dispatch(fetchingOn());
@@ -38,6 +32,7 @@ export const getSmurfs = () => dispatch => {
     .catch(err => dispatch({ type: ERROR_HANDLING, payload: err.message }));
 };
 
+//add smurf
 export const addSmurf = (name, age, height) => dispatch => {
   dispatch(errorReset());
   dispatch(addingOn());
@@ -54,14 +49,20 @@ export const addSmurf = (name, age, height) => dispatch => {
     .catch(err => dispatch({ type: ERROR_HANDLING, payload: err.message }));
 };
 
+//delete smurf
 export const deleteSmurf = id => dispatch => {
   dispatch(errorReset());
+  dispatch(deletingOn());
   axios
     .delete(`http://localhost:3333/smurfs/${id}`)
-    .then(res => dispatch({ type: DELETE_SMURF, payload: res.data }))
+    .then(res => {
+      dispatch({ type: DELETE_SMURF, payload: res.data });
+      dispatch(deletingOff());
+    })
     .catch(err => dispatch({ type: ERROR_HANDLING, payload: err.message }));
 };
 
+//transition (loading/adding/deleting) handling
 export const fetchingOn = () => {
   return {
     type: FETCHING_ON
@@ -86,6 +87,19 @@ export const addingOff = () => {
   };
 };
 
+export const deletingOn = () => {
+  return {
+    type: DELETING_ON
+  };
+};
+
+export const deletingOff = () => {
+  return {
+    type: DELETING_OFF
+  };
+};
+
+//error reset
 export const errorReset = () => {
   return {
     type: ERROR_RESET

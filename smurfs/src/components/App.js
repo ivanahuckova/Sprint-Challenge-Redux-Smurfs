@@ -52,6 +52,8 @@ export class App extends React.Component {
           </button>
         </form>
         <div>{this.props.addingSmurfs && <div>Adding...</div>}</div>
+        <div>{this.props.deletingSmurfs && <div>Deleting...</div>}</div>
+
         <div>
           {this.props.smurfs &&
             this.props.smurfs.map(smurf => {
@@ -87,6 +89,7 @@ function mapStateToProps(state) {
     smurfs: state.smurfs,
     fetchingSmurfs: state.fetchingSmurfs,
     addingSmurf: state.addingSmurf,
+    deletingSmurf: state.deleteSmurf,
     error: state.error
   };
 }

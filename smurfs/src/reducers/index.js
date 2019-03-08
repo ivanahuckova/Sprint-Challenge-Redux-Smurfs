@@ -1,27 +1,3 @@
-/*
-  Be sure to import in all of the action types from `../actions`
-*/
-
-/*
- Your initial/default state for this project could *Although does not have to* look a lot like this
- {
-   smurfs: [],
-   fetchingSmurfs: false
-   addingSmurf: false
-   updatingSmurf: false
-   deletingSmurf: false
-   error: null
- }
-*/
-
-/*
-  You'll only need one smurf reducer for this project.
-  Feel free to export it as a default and import as rootReducer. 
-  This will guard your namespacing issues.
-  There is no need for 'combineReducers' in this project.
-  Components can then read your store as, `state` and not `state.fooReducer`.
-*/
-
 import * as types from '../actions';
 
 const initialState = {
@@ -35,6 +11,7 @@ const initialState = {
 
 export default function smurfs(state = initialState, action) {
   switch (action.type) {
+    //smurfs state
     case types.GET_SMURFS:
       return {
         ...state,
@@ -50,6 +27,8 @@ export default function smurfs(state = initialState, action) {
         ...state,
         smurfs: action.payload
       };
+
+    //fetching state
     case types.FETCHING_ON:
       return {
         ...state,
@@ -60,6 +39,8 @@ export default function smurfs(state = initialState, action) {
         ...state,
         fetchingSmurfs: false
       };
+
+    //adding state
     case types.ADDING_ON:
       return {
         ...state,
@@ -70,6 +51,20 @@ export default function smurfs(state = initialState, action) {
         ...state,
         addingSmurf: false
       };
+
+    //deleting state
+    case types.DELETING_ON:
+      return {
+        ...state,
+        deletingSmurf: true
+      };
+    case types.DELETING_OFF:
+      return {
+        ...state,
+        deletingSmurf: false
+      };
+
+    //error state
     case types.ERROR_RESET:
       return {
         ...state,
@@ -80,6 +75,8 @@ export default function smurfs(state = initialState, action) {
         ...state,
         error: action.payload
       };
+
+    //default
     default:
       return state;
   }
