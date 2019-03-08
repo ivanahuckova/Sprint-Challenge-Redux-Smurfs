@@ -19,12 +19,14 @@ export class App extends React.Component {
     return (
       <div className="App">
         <h1>SMURFS!</h1>
+
         <button
           onClick={() => {
             this.props.getSmurfs();
           }}>
           Show me some smurfs!
         </button>
+        <div>{this.props.fetchingSmurfs && <div>Fetching...</div>}</div>
         <form>
           <h4>Add some smurfs</h4>
           <div>
@@ -48,22 +50,24 @@ export class App extends React.Component {
             Submit
           </button>
         </form>
+        <div>{this.props.addingSmurfs && <div>Adding...</div>}</div>
         <div>
-          {this.props.smurfs.map(smurf => {
-            return (
-              <div key={smurf.name}>
-                <div>
-                  Name:<span>{smurf.name}</span>
+          {this.props.smurfs &&
+            this.props.smurfs.map(smurf => {
+              return (
+                <div key={smurf.name}>
+                  <div>
+                    Name:<span>{smurf.name}</span>
+                  </div>
+                  <div>
+                    Age:<span>{smurf.age}</span>
+                  </div>
+                  <div>
+                    Height:<span>{smurf.height}</span>
+                  </div>
                 </div>
-                <div>
-                  Age:<span>{smurf.age}</span>
-                </div>
-                <div>
-                  Height:<span>{smurf.height}</span>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     );
@@ -72,7 +76,9 @@ export class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    smurfs: state.smurfs
+    smurfs: state.smurfs,
+    fetchingSmurfs: state.fetchingSmurfs,
+    addingSmurf: state.addingSmurf
   };
 }
 

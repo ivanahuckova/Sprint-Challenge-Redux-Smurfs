@@ -45,6 +45,26 @@ export default function smurfs(state = initialState, action) {
         ...state,
         smurfs: action.payload
       };
+    case types.FETCHING_ON:
+      return {
+        ...state,
+        fetchingSmurfs: true
+      };
+    case types.FETCHING_OFF:
+      return {
+        ...state,
+        fetchingSmurfs: false
+      };
+    case types.ADDING_ON:
+      return {
+        ...state,
+        addingSmurf: true
+      };
+    case types.ADDING_OFF:
+      return {
+        ...state,
+        addingSmurf: false
+      };
     default:
       return state;
   }
